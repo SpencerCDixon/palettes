@@ -2,21 +2,26 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/apex/log"
-	"github.com/apex/log/handlers/cli"
 	"github.com/pressly/chi"
 	"github.com/spencercdixon/palettes/crawler"
 )
 
+// Config supplies infrastructure for the API
+type Config struct {
+	Logger log.Interface
+}
+
+// Handler serves the palettes API
 type Handler struct {
+	*Config
 	router chi.Router
 }
 
-func New() *Handler {
-	h := &Handler{router: chi.NewRouter()}
+func New(c *Config) *Handler {
+	h := &Handler{Config: c, router: chi.NewRouter()}
 	h.router.Post("/palette", h.handlePalette)
 	return h
 }
@@ -38,6 +43,10 @@ func (h *Handler) renderJSON(w http.ResponseWriter, status int, data interface{}
 	w.Write(jsonData)
 }
 
+//---------
+// Handlers
+//---------
+
 func (h *Handler) handlePalette(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
 		http.Error(w, "Error parsing form.", http.StatusBadRequest)
@@ -45,20 +54,14 @@ func (h *Handler) handlePalette(w http.ResponseWriter, r *http.Request) {
 	}
 
 	url := r.Form.Get("url")
-	fmt.Println("Url: " + url)
 
-	log.SetHandler(cli.Default)
-	log.SetLevel(log.DebugLevel)
+	c := &crawler.Crawler{h.Logger}
 
-	ctx := log.WithFields(log.Fields{
-		"app": "palletes",
-		"env": "development",
-	})
-
-	c := &crawler.Crawler{ctx}
 	results, err := c.Crawl(url)
 	if err != nil {
-		log.Fatal(err.Error())
+		h.Logger.Error(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	top := results.Top(25)
