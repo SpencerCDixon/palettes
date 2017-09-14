@@ -10,6 +10,7 @@ import (
 
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/json"
+	lru "github.com/hashicorp/golang-lru"
 	"github.com/pressly/chi"
 	"github.com/pressly/chi/middleware"
 	"github.com/spencercdixon/palettes/api"
@@ -42,15 +43,21 @@ var serverCmd = &cobra.Command{
 		router.Use(middleware.Heartbeat("/ping"))
 
 		// Create and mount our API
+		cache, err := lru.New(100)
+		if err != nil {
+			log.Fatal(err.Error())
+		}
+
 		config := &api.Config{
 			Logger: ctx,
+			Cache:  cache,
 		}
 		apiHandler := api.New(config)
 		router.Mount("/api", apiHandler)
 
 		// Start listening
 		fmt.Println("Listening on: " + port)
-		err := http.ListenAndServe(":"+port, router)
+		err = http.ListenAndServe(":"+port, router)
 		ctx.Error(err.Error())
 	},
 }

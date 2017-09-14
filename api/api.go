@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/apex/log"
+	lru "github.com/hashicorp/golang-lru"
 	"github.com/pressly/chi"
 	"github.com/spencercdixon/palettes/crawler"
 )
@@ -12,6 +13,7 @@ import (
 // Config supplies infrastructure for the API
 type Config struct {
 	Logger log.Interface
+	Cache  *lru.Cache
 }
 
 // Handler serves the palettes API
@@ -55,7 +57,7 @@ func (h *Handler) handlePalette(w http.ResponseWriter, r *http.Request) {
 
 	url := r.Form.Get("url")
 
-	c := &crawler.Crawler{h.Logger}
+	c := &crawler.Crawler{Logger: h.Logger, Cache: h.Cache}
 
 	results, err := c.Crawl(url)
 	if err != nil {

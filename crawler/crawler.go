@@ -12,6 +12,7 @@ import (
 	"sync"
 
 	"github.com/apex/log"
+	"github.com/hashicorp/golang-lru"
 	"github.com/pkg/errors"
 	"golang.org/x/net/html"
 )
@@ -66,15 +67,22 @@ func NewColorResults() *ColorResults {
 // Crawler is in charge of crawling for css
 type Crawler struct {
 	Logger log.Interface
-	// Cache // TODO
+	Cache  *lru.Cache
 }
 
 // Crawl is how we get CSS color codes
 func (c Crawler) Crawl(url string) (*ColorResults, error) {
+	cached, ok := c.Cache.Get(url)
+	if ok {
+		c.Logger.Infof("Found website %s in the cache", url)
+		if results, ok := cached.(*ColorResults); ok {
+			c.Logger.Info("Returning color results")
+			return results, nil
+		}
+	}
+
 	c.Logger.Info("Starting crawl")
 	results := NewColorResults()
-
-	// TODO: check cache for results, if exist then return those
 
 	// do initial fetch of our website
 	resp, err := http.Get(url)
@@ -119,6 +127,8 @@ func (c Crawler) Crawl(url string) (*ColorResults, error) {
 		}
 	}
 	wg.Wait()
+
+	c.Cache.Add(url, results)
 
 	return results, nil
 }
