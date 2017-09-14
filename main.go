@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/spencercdixon/palletes/cmd"
+	"github.com/spencercdixon/palettes/cmd"
 )
 
 func main() {

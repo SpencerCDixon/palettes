@@ -8,7 +8,7 @@ import (
 
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/cli"
-	"github.com/spencercdixon/palletes/crawler"
+	"github.com/spencercdixon/palettes/crawler"
 	"github.com/spf13/cobra"
 )
 
@@ -21,7 +21,7 @@ var crawlCmd = &cobra.Command{
 		log.SetLevel(log.DebugLevel)
 
 		ctx := log.WithFields(log.Fields{
-			"app": "color-finder",
+			"app": "palletes",
 			"env": "development",
 		})
 		crawl := &crawler.Crawler{
@@ -47,5 +47,4 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// crawlCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-
 }

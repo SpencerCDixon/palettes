@@ -21,8 +21,8 @@ var ColorRe = regexp.MustCompile(`(#([0-9a-f]{3}){1,2}|(rgba|hsla)\(\d{1,3}%?(,\
 
 // ColorPair holds the results from searching a stylesheets contents
 type ColorPair struct {
-	Key   string // Color code (hex, rgba, hsl)
-	Value int    // Amount of times it's shown up
+	Key   string `json:"color"` // Color code (hex, rgba, hsl)
+	Value int    `json:"count"` // Amount of times it's shown up
 }
 
 func (cp ColorPair) String() string {
