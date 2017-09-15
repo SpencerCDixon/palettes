@@ -1,5 +1,4 @@
 // Copyright © 2017 Spencer Dixon <spencercdixon@gmail.com>
-//
 
 package cmd
 
@@ -8,6 +7,7 @@ import (
 
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/cli"
+	lru "github.com/hashicorp/golang-lru"
 	"github.com/spencercdixon/palettes/crawler"
 	"github.com/spf13/cobra"
 )
@@ -22,12 +22,14 @@ var crawlCmd = &cobra.Command{
 
 		ctx := log.WithFields(log.Fields{
 			"app": "palletes",
-			"env": "development",
+			"env": "cli",
 		})
-		crawl := &crawler.Crawler{
-			Logger: ctx,
+		cache, err := lru.New(100)
+		if err != nil {
+			log.Fatal(err.Error())
 		}
-		results, _ := crawl.Crawl("https://nytimes.com")
+		crawl := crawler.New(ctx, cache)
+		results, _ := crawl.Crawl(args[0])
 		top := results.Top(25)
 		for _, c := range top {
 			fmt.Println(c)
@@ -37,14 +39,4 @@ var crawlCmd = &cobra.Command{
 
 func init() {
 	RootCmd.AddCommand(crawlCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// crawlCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// crawlCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

@@ -1,5 +1,4 @@
 // Copyright © 2017 Spencer Dixon <spencercdixon@gmail.com>
-//
 
 package cmd
 
@@ -54,6 +53,9 @@ var serverCmd = &cobra.Command{
 		}
 		apiHandler := api.New(config)
 		router.Mount("/api", apiHandler)
+
+		// Seed the cache with common websites
+		go apiHandler.Seed()
 
 		// Start listening
 		fmt.Println("Listening on: " + port)

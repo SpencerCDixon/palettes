@@ -44,6 +44,7 @@ type ColorResults struct {
 	Map  map[string]int
 }
 
+// Top returns the top amt of colors found when parsing
 func (cr *ColorResults) Top(amt int) ColorList {
 	length := len(cr.Map)
 	cl := make(ColorList, length)
@@ -68,6 +69,11 @@ func NewColorResults() *ColorResults {
 type Crawler struct {
 	Logger log.Interface
 	Cache  *lru.Cache
+}
+
+// New creates a Crawler with the proper configuration
+func New(l log.Interface, c *lru.Cache) *Crawler {
+	return &Crawler{Logger: l, Cache: c}
 }
 
 // Crawl is how we get CSS color codes
@@ -126,8 +132,10 @@ func (c Crawler) Crawl(url string) (*ColorResults, error) {
 			break
 		}
 	}
-	wg.Wait()
 
+	// Wait until all external CSS have been fetched and scanned then cache
+	// results to avoid future HTTP requests
+	wg.Wait()
 	c.Cache.Add(url, results)
 
 	return results, nil

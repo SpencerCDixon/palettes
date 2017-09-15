@@ -22,6 +22,7 @@ type Handler struct {
 	router chi.Router
 }
 
+// New creates a configured API handler
 func New(c *Config) *Handler {
 	h := &Handler{Config: c, router: chi.NewRouter()}
 	h.router.Post("/palette", h.handlePalette)
@@ -43,6 +44,26 @@ func (h *Handler) renderJSON(w http.ResponseWriter, status int, data interface{}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	w.Write(jsonData)
+}
+
+// Seed kick starts common crawls to populate the cache to increase performance
+// on initial load.
+func (h *Handler) Seed() {
+	urls := []string{
+		"https://facebook.com",
+		"https://twitter.com",
+		"https://nytimes.com",
+		"https://google.com",
+		"https://github.com",
+	}
+
+	for _, u := range urls {
+		go func(url string) {
+			h.Logger.Infof("Seeding %s", u)
+			c := crawler.New(h.Logger, h.Cache)
+			c.Crawl(url)
+		}(u)
+	}
 }
 
 //---------

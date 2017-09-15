@@ -1,0 +1,22 @@
+{
+  "name": "ui",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "1.0.13"
+  },
+  "dependencies": {
+    "normalize.css": "^6.0.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-motion": "^0.5.1",
+    "reflexbox": "^3.0.0-0",
+    "styled-components": "^2.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
