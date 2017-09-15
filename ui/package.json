@@ -17,7 +17,8 @@
     "react-github-corner": "^1.0.0",
     "react-motion": "^0.5.1",
     "reflexbox": "^3.0.0-0",
-    "styled-components": "^2.1.1"
+    "styled-components": "^2.1.1",
+    "valid-url": "^1.0.9"
   },
   "scripts": {
     "start": "react-scripts start",

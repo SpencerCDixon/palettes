@@ -10,6 +10,7 @@ import FlipMove from 'react-flip-move';
 import shuffle from 'lodash.shuffle';
 import ToolBar from './components/ToolBar.js';
 import GithubCorner from 'react-github-corner';
+import Button from './components/Button';
 
 const sx = {
   display: 'flex',
@@ -48,7 +49,7 @@ const SubTitle = styled.h3`
 class App extends Component {
   state = { 
     results: [],
-    background: 'white',
+    background: '#FAFAFA',
     isLoading: false,
   }
 
@@ -81,9 +82,9 @@ class App extends Component {
             <ToolBar my={2}>
               <Search onSubmit={this.handleSubmit} />
               <Flex my={2}>
-                <button onClick={this.shuffle}>
-                  shuffle
-                </button>
+                <Button tabIndex={0} onClick={this.shuffle}>
+                  🔀 shuffle
+                </Button>
               </Flex>
             </ToolBar>
 

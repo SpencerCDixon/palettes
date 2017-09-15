@@ -9,3 +9,4 @@
 - [ ] refactor global css out into proper styled components
 - [ ] refactor responsiveness to use new 'css' implementation
 - [ ] add a copy to clipboard functionality on the color codes
+- [ ] validations on valid url when searching

@@ -55,6 +55,20 @@ func (h *Handler) Seed() {
 		"https://nytimes.com",
 		"https://google.com",
 		"https://github.com",
+		"https://youtube.com",
+		"https://wikipedia.org",
+		"https://baidu.com",
+		"https://reddit.com",
+		"https://amazon.com",
+		"https://instagram.com",
+		"https://uber.com",
+		"https://airbnb.com",
+		"https://linkedin.com",
+		"https://ebay.com",
+		"https://imgur.com",
+		"https://bing.com",
+		"https://twitch.tv",
+		"https://tubmlr.com",
 	}
 
 	for _, u := range urls {

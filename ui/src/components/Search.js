@@ -1,59 +1,63 @@
 import React from 'react';
 import styled from 'styled-components'
-import { Flex, Box } from 'reflexbox';
+import { reflex, Flex, Box } from 'reflexbox';
 import { flex, font } from '../styles';
 
 const Input = styled.input`
   padding: 15px;
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid #e3e3e3;
   font-size: 1em;
+  border: none;
 
   ::placeholder {
     color: #1C2B33;
   }
 `
 
-const Button = styled.a`
-  ${flex.center}
-  ${font.family};
-  text-align: center;
-  box-sizing: border-box;
-  padding: 0 12px;
-  text-transform: uppercase;
-  color: black;
-  letter-spacing: .5px;
-  height: 100%;
+const Container = reflex(styled.div`
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  border-radius: 3px;
   width: 100%;
-
-  border-width: 2px;
-  border-style: solid;
-  border-image: linear-gradient(90deg, #f79533 0%, #f37055 15%, #ef4e7b 30%, #a166ab 44%, #5073b8 58%, #1098ad 72%, #07b39b 86%, #6dba82 100%) 1 1;
-
-  &:hover {
-    cursor: pointer;
-    color: white;
-    background: linear-gradient(90deg, #f79533 0%, #f37055 15%, #ef4e7b 30%, #a166ab 44%, #5073b8 58%, #1098ad 72%, #07b39b 86%, #6dba82 100%);
-  }
-`
+  background: white;
+  ${flex.center}
+`);
 
 const Emoji = styled.span`
   font-size: 1.5em;
+  margin: 0 20px;
+  &:hover {
+    cursor: pointer;
+  }
+`
+const EmojiContainer = styled.a`
+  ${flex.center}
+  padding: 10px 0;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+  }
 `
 
 const Search = ({onSubmit}) => {
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      onSubmit();
+    }
+  }
+
   return (
-    <Flex>
-      <Box mr={1} auto>
-        <Input placeholder="E.x. https://facebook.com" />
-      </Box>
-      <Box ml={1}>
-        <Button onClick={onSubmit}>
-          Create &nbsp; <Emoji>🎨</Emoji>
-        </Button>
-      </Box>
-    </Flex>
+    <form>
+      <Container>
+        <Box auto>
+          <Input tabIndex={0} placeholder="E.x. https://facebook.com" />
+        </Box>
+        <EmojiContainer onClick={onSubmit} onKeyDown={handleKeyDown} tabIndex={0}>
+          <Emoji>🎨</Emoji>
+        </EmojiContainer>
+      </Container>
+    </form>
   );
 }
 
