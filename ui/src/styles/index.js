@@ -19,10 +19,10 @@ const sizes = {
 // newMedia.phone`background: blue;`
 const newMedia = Object.keys(sizes).reduce((acc, label) => {
   acc[label] = (...args) => css`
-    @media (max-width: ${sizes[label] / 16}em) {
-      ${css(...args)}
-    }
-    `
+  @media (max-width: ${sizes[label] / 16}em) {
+    ${css(...args)}
+  }
+`
   return acc
 }, {})
 
@@ -30,26 +30,34 @@ const newMedia = Object.keys(sizes).reduce((acc, label) => {
 
 export const flex = {
   row: `
-display: flex;
-flex-direction: row;
-`,
+    display: flex;
+    flex-direction: row;
+  `,
   col: `
-display: flex;
-flex-direction: column;
-`,
+    display: flex;
+    flex-direction: column;
+  `,
   alignCenter: `
-align-items: center;
-`,
+    align-items: center;
+  `,
   auto: `
-flex: 1;
-`,
+    flex: 1;
+  `,
   center: `
-display: flex;
-align-items: center;
-justify-content: center;
-`,
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
 };
 
 export const font = {
-  family: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif',
+  family: `
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  `,
+  ellipsis: `
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `,
 };

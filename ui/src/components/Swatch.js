@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components'
-import { media } from '../styles';
+import { font, media } from '../styles';
 import cn from 'classnames';
 
 const Container = styled.div`
@@ -41,11 +41,13 @@ const Amount = styled.div`
 const ColorCode = styled.div`
   text-transform: uppercase;
   color: black;
-  font-weight: bold;
+  font-weight: 300;
   font-size: 1em;
+  ${font.family};
   ${media.md} {
     font-size: .75em;
   }
+  ${font.ellipsis}
 `
 
 const BottomPanel = styled.div`

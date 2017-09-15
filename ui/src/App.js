@@ -28,17 +28,27 @@ const Container = styled.div`
 `
 
 const Title = styled.h1`
-  font-family: ${font.family};
+  ${font.family};
   text-align: center;
   letter-spacing: 6px;
   text-transform: uppercase;
   font-weight: 300;
 `
 
+const SubTitle = styled.h3`
+  ${font.family};
+  text-align: center;
+  letter-spacing: 3px;
+  text-tansform: uppercase;
+  color: black;
+  font-weight: 100;
+  margin: 0 0 20px 0;
+`
+
 class App extends Component {
   state = { 
     results: [],
-    background: '#F0F4F8',
+    background: 'white',
     isLoading: false,
   }
 
@@ -66,6 +76,7 @@ class App extends Component {
         <div style={{background}}>
           <Flex mx="auto" w={[ 1, 7/8, 6/8 ]} column>
             <Title className="text-gradient">Palettes Generator</Title>
+            <SubTitle>Discover the colors your favorite companies use</SubTitle>
             
             <ToolBar my={2}>
               <Search onSubmit={this.handleSubmit} />
