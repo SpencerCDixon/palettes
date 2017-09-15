@@ -6,11 +6,13 @@
     "react-scripts": "1.0.13"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "classnames": "^2.2.5",
     "lodash.range": "^3.2.0",
     "lodash.shuffle": "^4.2.0",
     "normalize.css": "^6.0.0",
     "prop-types": "^15.5.10",
+    "qs": "^6.5.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-feather": "^1.0.7",

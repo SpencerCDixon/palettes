@@ -12,6 +12,7 @@ import ToolBar from './components/ToolBar.js';
 import GithubCorner from 'react-github-corner';
 import Button from './components/Button';
 import { Shuffle } from 'react-feather';
+import { getColors } from './util/api.js';
 
 const sx = {
   display: 'flex',
@@ -21,12 +22,12 @@ const sx = {
 }
 
 const Container = styled.div`
-  width: 90%;
-  min-height: 100vh;
-  margin: 0 auto;
-  ${media.sm} { width: 80%; }
-  ${media.md} { width: 90%; }
-  ${media.lg} { width: 100%; }
+  // width: 90%;
+  // min-height: 100vh;
+  // margin: 0 auto;
+  // ${media.sm} { width: 80%; }
+  // ${media.md} { width: 90%; }
+  // ${media.lg} { width: 100%; }
 `
 
 const Title = styled.h1`
@@ -52,6 +53,7 @@ class App extends Component {
     results: [],
     background: '#FAFAFA',
     isLoading: false,
+    search: '',
   }
 
   componentDidMount() {
@@ -67,11 +69,21 @@ class App extends Component {
   handleSubmit = () => {
     // go fetch new stuff
     this.setState({isLoading: true})
-    setTimeout(() => this.setState({isLoading: false}), 3000);
+    getColors({url: this.state.search})
+      .then(({data}) => {
+        this.setState({results: data, isLoading: false, search: ''});
+      })
+      .catch(() => {
+        this.setState({isLoading: false, search: ''});
+      })
   }
 
+  changeSearch = e => this.setState({
+    search: e.target.value
+  })
+
   render() {
-    const { isLoading, background } = this.state;
+    const { search, isLoading, background } = this.state;
 
     return (
       <ReflexProvider>
@@ -81,7 +93,11 @@ class App extends Component {
             <SubTitle>Discover the colors your favorite companies use</SubTitle>
             
             <ToolBar my={2}>
-              <Search onSubmit={this.handleSubmit} />
+              <Search 
+                onSubmit={this.handleSubmit} 
+                onChange={this.changeSearch}
+                value={search}
+              />
               <Flex my={2}>
                 <Button tabIndex={0} onClick={this.shuffle}>
                   <Shuffle /> &nbsp; shuffle

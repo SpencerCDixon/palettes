@@ -17,7 +17,7 @@ const Input = styled.input`
 
 const Container = reflex(styled.div`
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-  border-radius: 3px;
+  // border-radius: 3px;
   width: 100%;
   background: white;
   ${flex.center}
@@ -40,7 +40,7 @@ const EmojiContainer = styled.a`
   }
 `
 
-const Search = ({onSubmit}) => {
+const Search = ({onSubmit, value, onChange}) => {
   const handleKeyDown = (e) => {
     if (e.keyCode === 13) {
       onSubmit();
@@ -51,7 +51,12 @@ const Search = ({onSubmit}) => {
     <form>
       <Container>
         <Box auto>
-          <Input tabIndex={0} placeholder="E.x. https://facebook.com" />
+          <Input 
+            tabIndex={0} 
+            placeholder="E.x. https://facebook.com" 
+            value={value}
+            onChange={onChange}
+          />
         </Box>
         <EmojiContainer onClick={onSubmit} onKeyDown={handleKeyDown} tabIndex={0}>
           <Emoji>🎨</Emoji>

@@ -36,6 +36,7 @@ const Amount = styled.div`
   color: white;
   text-transform: uppercase;
   font-weight: 300;
+  ${font.family};
 `
 
 const ColorCode = styled.div`
