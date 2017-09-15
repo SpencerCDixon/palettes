@@ -1,3 +1,5 @@
+import { css } from 'styled-components';
+
 const mediaSize = size => `@media only screen and (max-width: ${size}em)`
 
 export const media = {
@@ -6,28 +8,46 @@ export const media = {
   lg: mediaSize(64),
 };
 
-    // '@media only screen and (max-width: 936px)'
+const sizes = {
+  desktop: 992,
+  tablet: 768,
+  phone: 376
+}
+
+// newMedia.desktop`background: blue;`
+// newMedia.tablet`background: blue;`
+// newMedia.phone`background: blue;`
+const newMedia = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (max-width: ${sizes[label] / 16}em) {
+      ${css(...args)}
+    }
+    `
+  return acc
+}, {})
+
+// '@media only screen and (max-width: 936px)'
 
 export const flex = {
   row: `
-    display: flex;
-    flex-direction: row;
-  `,
+display: flex;
+flex-direction: row;
+`,
   col: `
-    display: flex;
-    flex-direction: column;
-  `,
+display: flex;
+flex-direction: column;
+`,
   alignCenter: `
-    align-items: center;
-  `,
+align-items: center;
+`,
   auto: `
-    flex: 1;
-  `,
+flex: 1;
+`,
   center: `
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  `,
+display: flex;
+align-items: center;
+justify-content: center;
+`,
 };
 
 export const font = {

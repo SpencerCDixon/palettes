@@ -6,15 +6,19 @@ import { mock } from './mock.js';
 import { ReflexProvider } from 'reflexbox';
 import { font, media } from './styles';
 import { Flex, Box } from 'reflexbox';
+import FlipMove from 'react-flip-move';
+import shuffle from 'lodash.shuffle';
+
+const sx = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  justifyContent: 'space-around',
+}
 
 const Container = styled.div`
-  display: flex;
   width: 90%;
   min-height: 100vh;
-  background: ${props => props.bg};
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
   margin: 0 auto;
   ${media.sm} { width: 80%; }
   ${media.md} { width: 90%; }
@@ -40,27 +44,42 @@ class App extends Component {
   }
 
   handleBackgroundChange = (background) => this.setState({background})
+  shuffle = () => {
+    this.setState({results: shuffle(this.state.results)});
+  }
 
   render() {
+    const { background } = this.state;
     return (
       <ReflexProvider>
-        <Flex style={{margin: '0 auto'}} w={[ 1, 7/8, 6/8 ]} column>
-          <Title className="text-gradient">Palettes Generator</Title>
-          
-          <Box my={2}>
-            <Search />
-          </Box>
+        <div style={{background}}>
+          <Flex mx="auto" w={[ 1, 7/8, 6/8 ]} column>
+            <Title className="text-gradient">Palettes Generator</Title>
+            
+            <Box my={2}>
+              <Search />
+              <button onClick={this.shuffle}> shuffle </button>
+            </Box>
 
-          <Container bg={this.state.background}>
-            {this.state.results.map(({color, count}) => (
-              <Swatch 
-                onClick={this.handleBackgroundChange} 
-                color={color} 
-                amount={count} 
-              />
-            ))}
-          </Container>
-        </Flex>
+            <Container>
+              <FlipMove 
+                duration={550} 
+                enterAnimation="elevator" 
+                leaveAnimation="elevator"
+                style={sx}
+              >
+                {this.state.results.map(({color, count}) => (
+                  <Swatch 
+                    key={color}
+                    onClick={this.handleBackgroundChange} 
+                    color={color} 
+                    amount={count} 
+                  />
+                ))}
+              </FlipMove>
+            </Container>
+          </Flex>
+        </div>
       </ReflexProvider>
     );
   }

@@ -40,7 +40,7 @@ const Search = () => {
   return (
     <Flex>
       <Box mr={1} auto>
-        <Input />
+        <Input placeholder="E.x. https://facebook.com" />
       </Box>
       <Box ml={1}>
         <Button>

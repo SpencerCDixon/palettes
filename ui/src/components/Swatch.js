@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components'
 import { media } from '../styles';
 
@@ -50,19 +50,34 @@ const Identifier = styled.div`
     font-size: .75em;
   }
 `
+class Swatch extends Component {
+  static propTypes = {
+    color: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+    onClick: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool,
+  }
 
-const Swatch = ({color, amount, onClick}) => (
-  <Container onClick={() => onClick(color)}>
-    <Color color={color}>
-      <Amount>
-        {amount}
-      </Amount>
-    </Color>
+  static defaultProps = {
+    isLoading: false,
+  }
 
-    <Identifier>
-      {color}
-    </Identifier>
-  </Container>
-)
+  render() {
+    const { color, amount, onClick, isLoading } = this.props;
+    return (
+      <Container onClick={() => onClick(color)}>
+        <Color color={color}>
+          <Amount>
+            {amount}
+          </Amount>
+        </Color>
+
+        <Identifier>
+          {color}
+        </Identifier>
+      </Container>
+    );
+  }
+}
 
 export default Swatch;
