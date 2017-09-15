@@ -6,6 +6,7 @@
     "react-scripts": "1.0.13"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "lodash.range": "^3.2.0",
     "lodash.shuffle": "^4.2.0",
     "normalize.css": "^6.0.0",
@@ -13,6 +14,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-flip-move": "^2.9.15",
+    "react-github-corner": "^1.0.0",
     "react-motion": "^0.5.1",
     "reflexbox": "^3.0.0-0",
     "styled-components": "^2.1.1"

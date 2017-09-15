@@ -7,6 +7,12 @@ const Input = styled.input`
   padding: 15px;
   width: 100%;
   box-sizing: border-box;
+  border: 1px solid #e3e3e3;
+  font-size: 1em;
+
+  ::placeholder {
+    color: #1C2B33;
+  }
 `
 
 const Button = styled.a`
@@ -36,14 +42,14 @@ const Emoji = styled.span`
   font-size: 1.5em;
 `
 
-const Search = () => {
+const Search = ({onSubmit}) => {
   return (
     <Flex>
       <Box mr={1} auto>
         <Input placeholder="E.x. https://facebook.com" />
       </Box>
       <Box ml={1}>
-        <Button>
+        <Button onClick={onSubmit}>
           Create &nbsp; <Emoji>🎨</Emoji>
         </Button>
       </Box>

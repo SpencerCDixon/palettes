@@ -8,6 +8,8 @@ import { font, media } from './styles';
 import { Flex, Box } from 'reflexbox';
 import FlipMove from 'react-flip-move';
 import shuffle from 'lodash.shuffle';
+import ToolBar from './components/ToolBar.js';
+import GithubCorner from 'react-github-corner';
 
 const sx = {
   display: 'flex',
@@ -36,7 +38,8 @@ const Title = styled.h1`
 class App extends Component {
   state = { 
     results: [],
-    background: 'white',
+    background: '#F0F4F8',
+    isLoading: false,
   }
 
   componentDidMount() {
@@ -44,22 +47,34 @@ class App extends Component {
   }
 
   handleBackgroundChange = (background) => this.setState({background})
+
   shuffle = () => {
     this.setState({results: shuffle(this.state.results)});
   }
 
+  handleSubmit = () => {
+    // go fetch new stuff
+    this.setState({isLoading: true})
+    setTimeout(() => this.setState({isLoading: false}), 3000);
+  }
+
   render() {
-    const { background } = this.state;
+    const { isLoading, background } = this.state;
+
     return (
       <ReflexProvider>
         <div style={{background}}>
           <Flex mx="auto" w={[ 1, 7/8, 6/8 ]} column>
             <Title className="text-gradient">Palettes Generator</Title>
             
-            <Box my={2}>
-              <Search />
-              <button onClick={this.shuffle}> shuffle </button>
-            </Box>
+            <ToolBar my={2}>
+              <Search onSubmit={this.handleSubmit} />
+              <Flex my={2}>
+                <button onClick={this.shuffle}>
+                  shuffle
+                </button>
+              </Flex>
+            </ToolBar>
 
             <Container>
               <FlipMove 
@@ -74,11 +89,13 @@ class App extends Component {
                     onClick={this.handleBackgroundChange} 
                     color={color} 
                     amount={count} 
+                    isLoading={isLoading}
                   />
                 ))}
               </FlipMove>
             </Container>
           </Flex>
+          <GithubCorner href="TODO" />
         </div>
       </ReflexProvider>
     );

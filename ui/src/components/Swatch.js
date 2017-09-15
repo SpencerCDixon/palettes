@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components'
 import { media } from '../styles';
+import cn from 'classnames';
 
 const Container = styled.div`
   width: 200px;
@@ -26,8 +27,8 @@ const Container = styled.div`
 `
 
 const Color = styled.div`
-  height: 90%;
-  background: ${props => props.color};
+  height: ${props => props.isLoading ? '90%' : '90%'};
+  background: ${props => props.isLoading ? '' : props.color};
 `
 
 const Amount = styled.div`
@@ -37,19 +38,28 @@ const Amount = styled.div`
   font-weight: 300;
 `
 
-const Identifier = styled.div`
-  border-top: 1px solid rgba(0,0,0,0.06);
+const ColorCode = styled.div`
   text-transform: uppercase;
   color: black;
-  background: white;
-  padding: 20px;
-  height: 10%;
   font-weight: bold;
   font-size: 1em;
   ${media.md} {
     font-size: .75em;
   }
 `
+
+const BottomPanel = styled.div`
+  border-top: 1px solid rgba(0,0,0,0.06);
+  height: 10%;
+  background: white;
+  padding: 20px;
+`
+
+const LoadingColorCode = styled.div`
+  height: 20px;
+  width: 100%;
+`
+
 class Swatch extends Component {
   static propTypes = {
     color: PropTypes.string.isRequired,
@@ -63,18 +73,26 @@ class Swatch extends Component {
   }
 
   render() {
-    const { color, amount, onClick, isLoading } = this.props;
+    const { className, color, amount, onClick, isLoading } = this.props;
+    const classes = cn(className, { "animated-background": isLoading });
+
     return (
-      <Container onClick={() => onClick(color)}>
-        <Color color={color}>
-          <Amount>
-            {amount}
-          </Amount>
+      <Container className={classes} onClick={() => onClick(color)}>
+        <Color isLoading={isLoading} color={color}>
+          {!isLoading && (
+            <Amount>
+              {amount}
+            </Amount>
+          )}
         </Color>
 
-        <Identifier>
-          {color}
-        </Identifier>
+        <BottomPanel>
+          {isLoading ? (
+            <LoadingColorCode className="animated-background" />
+          ) : (
+            <ColorCode> {color} </ColorCode>
+          )}
+        </BottomPanel>
       </Container>
     );
   }

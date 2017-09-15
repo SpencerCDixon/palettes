@@ -8,14 +8,32 @@ body {
   color: #a166ab;
 }
 
-@supports ((background-clip: text) or (-webkit-background-clip: text)) and
-((text-fill-color: transparent) or (-webkit-text-fill-color: transparent)) {
-  .text-gradient {
-    background-image: linear-gradient(90deg, #f79533 0%, #f37055 15%, #ef4e7b 30%, #a166ab 44%, #5073b8 58%, #1098ad 72%, #07b39b 86%, #6dba82 100%);
-    background-size: cover;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
+.text-gradient {
+  background-image: linear-gradient(90deg, #f79533 0%, #f37055 15%, #ef4e7b 30%, #a166ab 44%, #5073b8 58%, #1098ad 72%, #07b39b 86%, #6dba82 100%);
+  background-size: cover;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+@keyframes placeHolderShimmer{
+  0%{
+    background-position: -468px 0
   }
+  100%{
+    background-position: 468px 0
+  }
+}
+
+.animated-background {
+  animation-duration: 1.3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: ease-in;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #F0F4F8 8%, #dae3ed 18%, #F0F4F8 33%);
+  background-size: 800px 104px;
+  position: relative;
 }
