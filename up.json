@@ -1,0 +1,17 @@
+{
+  "name": "palettes",
+  "profile": "up",
+  "environment": {
+    "GO_ENV": "production"
+  },
+  "cors": {
+    "enable": true
+  },
+  "proxy": {
+    "command": "./palettes server"
+  },
+  "hooks": {
+    "build": "GOOS=linux GOARCH=amd64 go build -o palettes",
+    "clean": "rm palettes"
+  }
+}

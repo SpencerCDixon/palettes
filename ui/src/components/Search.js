@@ -13,18 +13,22 @@ const Button = styled.a`
   text-align: center;
   display: flex;
   align-items: center;
-  border: 1px solid #1C2B33;
   box-sizing: border-box;
   padding: 0 12px;
   text-transform: uppercase;
   color: black;
-  font-family: ${font.family}
-  letter-spacing: 1px;
-  line-height: 10px;
+  letter-spacing: .5px;
+  font-family: ${font.family};
   height: 100%;
   width: 100%;
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(90deg, #f79533 0%, #f37055 15%, #ef4e7b 30%, #a166ab 44%, #5073b8 58%, #1098ad 72%, #07b39b 86%, #6dba82 100%) 1 1;
+
   &:hover {
     cursor: pointer;
+    color: white;
+    background: linear-gradient(90deg, #f79533 0%, #f37055 15%, #ef4e7b 30%, #a166ab 44%, #5073b8 58%, #1098ad 72%, #07b39b 86%, #6dba82 100%);
   }
 `
 
