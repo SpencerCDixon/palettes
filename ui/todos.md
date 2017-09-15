@@ -1,8 +1,10 @@
 # TODOs
 
 - [ ] connect to API
-- [ ] make the swatches come in one at a time and grow
+- [x] make the swatches come in one at a time and grow
 - [ ] move the search bar up when hitting enter
-- [ ] add some sort of spinner for the AJAX requests
+- [x] add some sort of spinner for the AJAX requests
 - [ ] decide on a background color
 - [ ] decide on mobx integretion or pure React is sufficient
+- [ ] refactor global css out into proper styled components
+- [ ] refactor responsiveness to use new 'css' implementation
