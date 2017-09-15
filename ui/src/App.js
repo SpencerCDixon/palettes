@@ -4,9 +4,8 @@ import Search from './components/Search.js';
 import styled from 'styled-components'
 import { mock } from './mock.js';
 import { ReflexProvider } from 'reflexbox';
-import { media } from './styles';
+import { font, media } from './styles';
 import { Flex, Box } from 'reflexbox';
-import Grow from './components/Grow.js';
 
 const Container = styled.div`
   display: flex;
@@ -17,9 +16,17 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 0 auto;
-  ${media.sm} { width: 90%; }
-  ${media.md} { width: 80%; }
-  ${media.lg} { width: 80%; }
+  ${media.sm} { width: 80%; }
+  ${media.md} { width: 90%; }
+  ${media.lg} { width: 100%; }
+`
+
+const Title = styled.h1`
+  font-family: ${font.family};
+  text-align: center;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  font-weight: 300;
 `
 
 class App extends Component {
@@ -37,8 +44,9 @@ class App extends Component {
   render() {
     return (
       <ReflexProvider>
-        <Flex column>
-          <Grow />
+        <Flex style={{margin: '0 auto'}} w={[ 1, 7/8, 6/8 ]} column>
+          <Title className="text-gradient">Palettes Generator</Title>
+          
           <Box my={2}>
             <Search />
           </Box>

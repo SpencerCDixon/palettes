@@ -6,6 +6,7 @@
     "react-scripts": "1.0.13"
   },
   "dependencies": {
+    "lodash.range": "^3.2.0",
     "normalize.css": "^6.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

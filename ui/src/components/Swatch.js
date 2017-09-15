@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import { media } from '../styles';
 
 const Container = styled.div`
   width: 200px;
@@ -13,6 +14,14 @@ const Container = styled.div`
   &:hover {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.06);
     cursor: pointer;
+  }
+  ${media.sm} { 
+    width: 100px;
+    height: 100px;
+  }
+  ${media.md} {
+    width: 150px;
+    height: 150px;
   }
 `
 
@@ -36,6 +45,10 @@ const Identifier = styled.div`
   padding: 20px;
   height: 10%;
   font-weight: bold;
+  font-size: 1em;
+  ${media.md} {
+    font-size: .75em;
+  }
 `
 
 const Swatch = ({color, amount, onClick}) => (
