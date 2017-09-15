@@ -11,6 +11,7 @@ import shuffle from 'lodash.shuffle';
 import ToolBar from './components/ToolBar.js';
 import GithubCorner from 'react-github-corner';
 import Button from './components/Button';
+import { Shuffle } from 'react-feather';
 
 const sx = {
   display: 'flex',
@@ -83,7 +84,7 @@ class App extends Component {
               <Search onSubmit={this.handleSubmit} />
               <Flex my={2}>
                 <Button tabIndex={0} onClick={this.shuffle}>
-                  🔀 shuffle
+                  <Shuffle /> &nbsp; shuffle
                 </Button>
               </Flex>
             </ToolBar>
