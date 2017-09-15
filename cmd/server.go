@@ -55,7 +55,7 @@ var serverCmd = &cobra.Command{
 		router.Mount("/api", apiHandler)
 
 		// Seed the cache with common websites
-		go apiHandler.Seed()
+		// go apiHandler.Seed()
 
 		// Start listening
 		fmt.Println("Listening on: " + port)
