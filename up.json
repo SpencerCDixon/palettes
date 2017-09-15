@@ -13,5 +13,6 @@
   "hooks": {
     "build": "GOOS=linux GOARCH=amd64 go build -o palettes",
     "clean": "rm palettes"
-  }
+  },
+  "regions": [ "us-east-1", "eu-west-2" ]
 }

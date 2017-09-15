@@ -28,7 +28,7 @@ var serverCmd = &cobra.Command{
 		port := viper.GetString("port")
 
 		// Set up JSON structured logging
-		log.SetHandler(json.New(os.Stderr))
+		log.SetHandler(json.New(os.Stdout))
 		ctx := log.WithFields(log.Fields{
 			"app": "palettes",
 			"env": env,
