@@ -58,6 +58,11 @@ func (cr *ColorResults) Top(amt int) ColorList {
 		i++
 	}
 	sort.Sort(cl)
+
+	// if there's only a few just return them all
+	if length < amt {
+		return cl
+	}
 	return cl[length-amt:]
 }
 
@@ -148,9 +153,9 @@ func (c Crawler) Crawl(url string) (*ColorResults, error) {
 }
 
 func (c Crawler) fetchAndScan(url string, results *ColorResults, wg *sync.WaitGroup) {
+	defer wg.Done()
 	ctx := c.Logger.WithField("url", url)
 	ctx.Info("Fetching css")
-	defer wg.Done()
 	resp, err := http.Get(url)
 	if err != nil {
 		ctx.Error("Error fetching")
@@ -158,6 +163,7 @@ func (c Crawler) fetchAndScan(url string, results *ColorResults, wg *sync.WaitGr
 	}
 	defer resp.Body.Close()
 	scanForColors(resp.Body, results)
+	ctx.Info("Done scanning")
 }
 
 // scanForColors takes in a reader and result set and counts how many times the

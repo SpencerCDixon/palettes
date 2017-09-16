@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FlipMove from 'react-flip-move';
 import { flattenProp } from 'recompose';
-import { Flex } from 'reflexbox';
+import { Flex, Box } from 'reflexbox';
 
 import { Container, Title, SubTitle } from './styles';
-import { Shuffle } from 'react-feather';
-import { Swatch, ToolBar, Button, Search } from '..';
+// import { Twitter, Github, Facebook, Shuffle } from 'react-feather';
+import Facebook from 'react-icons/lib/io/social-facebook.js';
+import { CommonSites, Swatch, ToolBar, Button, Search } from '..';
 
 const colorContainer = {
   display: 'flex',
@@ -36,6 +37,7 @@ class Home extends Component {
         setSearch,
         shuffle,
         fetchColors,
+        setAndFetch,
       }
     } = this.props;
 
@@ -52,9 +54,13 @@ class Home extends Component {
               value={searchValue}
             />
             <Flex my={2}>
+              <CommonSites onClick={setAndFetch} />
+
+              {/*
               <Button tabIndex={0} onClick={shuffle}>
                 <Shuffle /> &nbsp; shuffle
               </Button>
+              */}
             </Flex>
           </ToolBar>
 

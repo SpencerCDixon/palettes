@@ -16,7 +16,7 @@ class HomeStore extends Component {
     const queryString = window.location.href.split('?')[1]
     const params = qs.parse(queryString);
     if (params.url) {
-      this.setState({searchValue: params.url}, this.fetchColors);
+      this.setAndFetch(params.url);
     } else {
       this.setState({colors: mockColors});
     }
@@ -41,6 +41,9 @@ class HomeStore extends Component {
       })
   }
 
+  setAndFetch = url => {
+    this.setState({searchValue: url}, this.fetchColors);
+  }
 
   render() {
     const actions = {
@@ -48,6 +51,7 @@ class HomeStore extends Component {
       setBackground: this.setBackground,
       shuffle: this.shuffle,
       fetchColors: this.fetchColors,
+      setAndFetch: this.setAndFetch,
     };
 
     return <Home actions={actions} homeState={this.state} />
