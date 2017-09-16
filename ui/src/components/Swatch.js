@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components'
-import { font, media } from '../styles';
+import { animations, font, media } from '../styles';
 import cn from 'classnames';
 
 const Container = styled.div`
@@ -13,6 +13,9 @@ const Container = styled.div`
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.06);
   border-radius: 3px;
   border: 1px solid rgba(0,0,0,0.06);
+
+  ${p => p.isLoading && animations.loading}
+
   &:hover {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.06);
     cursor: pointer;
@@ -78,10 +81,10 @@ class Swatch extends Component {
 
   render() {
     const { className, color, amount, onClick, isLoading } = this.props;
-    const classes = cn(className, { "animated-background": isLoading });
+    // const classes = cn(className, { "animated-background": isLoading });
 
     return (
-      <Container className={classes} onClick={() => onClick(color)}>
+      <Container isLoading={isLoading} onClick={() => onClick(color)}>
         <Color isLoading={isLoading} color={color}>
           {!isLoading && (
             <Amount>

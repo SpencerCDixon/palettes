@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { keyframes, css } from 'styled-components';
 
 const mediaSize = size => `@media only screen and (max-width: ${size}em)`
 
@@ -68,5 +68,30 @@ export const font = {
     -webkit-text-fill-color: transparent;
     text-fill-color: transparent;
 
+  `
+};
+
+const frames = {
+  loading: keyframes`
+    0%{
+      background-position: -468px 0
+    }
+    100%{
+      background-position: 468px 0
+    }
+  `,
+}
+
+export const animations = {
+  loading: `
+    animation-duration: 1.3s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: ${frames.loading};
+    animation-timing-function: ease-in;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #F0F4F8 8%, #dae3ed 18%, #F0F4F8 33%);
+    background-size: 800px 104px;
+    position: relative;
   `
 };
