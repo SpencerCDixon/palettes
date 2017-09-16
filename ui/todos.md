@@ -11,7 +11,7 @@
 - [x] refactor global css out into proper styled components
 - [x] refactor responsiveness to use new 'css' implementation
 - [ ] add a copy to clipboard functionality on the color codes
-- [ ] validations on valid url when searching
+- [x] validations on valid url when searching
 
 ## Backend
 - [ ] fix issue with submitting incorrect URLs

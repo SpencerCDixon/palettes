@@ -5,8 +5,6 @@ import { flattenProp } from 'recompose';
 import { Flex, Box } from 'reflexbox';
 
 import { Container, Title, SubTitle } from './styles';
-// import { Twitter, Github, Facebook, Shuffle } from 'react-feather';
-import Facebook from 'react-icons/lib/io/social-facebook.js';
 import { CommonSites, Swatch, ToolBar, Button, Search } from '..';
 
 const colorContainer = {
