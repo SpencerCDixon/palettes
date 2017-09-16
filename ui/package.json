@@ -7,23 +7,18 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "classnames": "^2.2.5",
-    "lodash.range": "^3.2.0",
     "lodash.shuffle": "^4.2.0",
-    "normalize.css": "^6.0.0",
+    "normalize.css": "^7.0.0",
     "prop-types": "^15.5.10",
     "qs": "^6.5.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-feather": "^1.0.7",
     "react-flip-move": "^2.9.15",
     "react-github-corner": "^1.0.0",
     "react-icons": "^2.2.5",
-    "react-motion": "^0.5.1",
     "recompose": "^0.25.0",
     "reflexbox": "^3.0.0-0",
-    "styled-components": "^2.1.1",
-    "valid-url": "^1.0.9"
+    "styled-components": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
