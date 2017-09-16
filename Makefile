@@ -18,4 +18,9 @@ clean:
 	@rm ./palettes
 	@cd ui && npm run clean
 
-.PHONY: test dev deploy
+# Build compiles the go API
+build:
+	@echo "Building palettes..."
+	@go build 
+
+.PHONY: test dev deploy build

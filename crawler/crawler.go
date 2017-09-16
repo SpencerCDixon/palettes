@@ -47,6 +47,10 @@ type ColorResults struct {
 // Top returns the top amt of colors found when parsing
 func (cr *ColorResults) Top(amt int) ColorList {
 	length := len(cr.Map)
+	if length == 0 {
+		return ColorList{}
+	}
+
 	cl := make(ColorList, length)
 	i := 0
 	for k, v := range cr.Map {
@@ -82,12 +86,14 @@ func (c Crawler) Crawl(url string) (*ColorResults, error) {
 	if ok {
 		c.Logger.Infof("Found website %s in the cache", url)
 		if results, ok := cached.(*ColorResults); ok {
-			c.Logger.Info("Returning color results")
+			c.Logger.Infof("Returning color results: %+v", results)
 			return results, nil
 		}
 	}
 
-	c.Logger.Info("Starting crawl")
+	ctx := c.Logger.WithField("url", url)
+
+	ctx.Info("Starting crawl")
 	results := NewColorResults()
 
 	// do initial fetch of our website
@@ -121,14 +127,14 @@ func (c Crawler) Crawl(url string) (*ColorResults, error) {
 			isStyle := t.Data == "style"
 			if isStyle {
 				if tt = z.Next(); tt == html.TextToken {
-					c.Logger.Info("Scanning <style> tag")
+					ctx.Info("Scanning style tag")
 					scanForColors(strings.NewReader(z.Token().Data), results)
 				}
 			}
 		}
 
 		if tt == html.ErrorToken {
-			c.Logger.Debug("End of parsing")
+			log.Debug("End of parsing")
 			break
 		}
 	}
@@ -142,9 +148,14 @@ func (c Crawler) Crawl(url string) (*ColorResults, error) {
 }
 
 func (c Crawler) fetchAndScan(url string, results *ColorResults, wg *sync.WaitGroup) {
-	c.Logger.WithField("url", url).Info("Fetching css")
+	ctx := c.Logger.WithField("url", url)
+	ctx.Info("Fetching css")
 	defer wg.Done()
-	resp, _ := http.Get(url)
+	resp, err := http.Get(url)
+	if err != nil {
+		ctx.Error("Error fetching")
+		return
+	}
 	defer resp.Body.Close()
 	scanForColors(resp.Body, results)
 }

@@ -1,5 +1,7 @@
 # TODOs
 
+## UI
+
 - [ ] connect to API
 - [x] make the swatches come in one at a time and grow
 - [ ] move the search bar up when hitting enter
@@ -10,3 +12,7 @@
 - [ ] refactor responsiveness to use new 'css' implementation
 - [ ] add a copy to clipboard functionality on the color codes
 - [ ] validations on valid url when searching
+
+## Backend
+- [ ] fix issue with submitting incorrect URLs
+- [ ] fix caching issue/create a flag to run server without the cache

@@ -67,7 +67,6 @@ class App extends Component {
   }
 
   handleSubmit = () => {
-    // go fetch new stuff
     this.setState({isLoading: true})
     getColors({url: this.state.search})
       .then(({data}) => {

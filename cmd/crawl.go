@@ -29,7 +29,10 @@ var crawlCmd = &cobra.Command{
 			log.Fatal(err.Error())
 		}
 		crawl := crawler.New(ctx, cache)
-		results, _ := crawl.Crawl(args[0])
+		results, err := crawl.Crawl(args[0])
+		if err != nil {
+			ctx.Error(err.Error())
+		}
 		top := results.Top(25)
 		for _, c := range top {
 			fmt.Println(c)
