@@ -57,13 +57,13 @@ func (cr *ColorResults) Top(amt int) ColorList {
 		cl[i] = ColorPair{k, v}
 		i++
 	}
-	sort.Sort(cl)
+	sort.Sort(sort.Reverse(cl))
 
 	// if there's only a few just return them all
 	if length < amt {
 		return cl
 	}
-	return cl[length-amt:]
+	return cl[:amt]
 }
 
 // NewColorResults is an initializer for color results
