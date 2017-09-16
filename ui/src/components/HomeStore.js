@@ -27,7 +27,7 @@ class HomeStore extends Component {
   setBackground = background => this.setState({background})
 
   shuffle = () => {
-    this.setState({results: shuffle(this.state.results)});
+    this.setState({colors: shuffle(this.state.colors)});
   }
 
   fetchColors = () => {

@@ -42,8 +42,8 @@ class Home extends Component {
     return (
       <Container bg={background}>
         <Flex mx="auto" column>
-          <Title>Palettes Generator</Title>
-          <SubTitle>Discover the colors your favorite websites use</SubTitle>
+          <Title my={[1,2,2]}>Palettes Generator</Title>
+          <SubTitle my={[1, 2, 2]}>Discover the colors your favorite websites use</SubTitle>
 
           <ToolBar my={2}>
             <Search 

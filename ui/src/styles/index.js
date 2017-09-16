@@ -1,23 +1,13 @@
 import { keyframes, css } from 'styled-components';
 
-const mediaSize = size => `@media only screen and (max-width: ${size}em)`
-
-export const media = {
-  sm: mediaSize(40),
-  md: mediaSize(52),
-  lg: mediaSize(64),
-};
-
 const sizes = {
   desktop: 992,
   tablet: 768,
   phone: 376
 }
 
-// newMedia.desktop`background: blue;`
-// newMedia.tablet`background: blue;`
-// newMedia.phone`background: blue;`
-const newMedia = Object.keys(sizes).reduce((acc, label) => {
+// Ex: media.desktop`background: blue;`
+export const media = Object.keys(sizes).reduce((acc, label) => {
   acc[label] = (...args) => css`
   @media (max-width: ${sizes[label] / 16}em) {
     ${css(...args)}
@@ -25,8 +15,6 @@ const newMedia = Object.keys(sizes).reduce((acc, label) => {
 `
   return acc
 }, {})
-
-// '@media only screen and (max-width: 936px)'
 
 export const flex = {
   row: `
