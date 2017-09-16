@@ -29,7 +29,7 @@ class Swatch extends Component {
 
         <BottomPanel>
           {isLoading ? (
-            <LoadingColorCode className="animated-background" />
+            <LoadingColorCode />
           ) : (
             <ColorCode> {color} </ColorCode>
           )}

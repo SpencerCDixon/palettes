@@ -63,4 +63,5 @@ export const BottomPanel = styled.div`
 export const LoadingColorCode = styled.div`
   height: 20px;
   width: 100%;
+  ${animations.loading}
 `

@@ -5,7 +5,7 @@ import { flattenProp } from 'recompose';
 import { Flex, Box } from 'reflexbox';
 
 import { Container, Title, SubTitle } from './styles';
-import { CommonSites, Swatch, ToolBar, Button, Search } from '..';
+import { CommonSites, Swatch, ToolBar, Search } from '..';
 
 const colorContainer = {
   display: 'flex',

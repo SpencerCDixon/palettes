@@ -43,7 +43,6 @@ export const font = {
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
   `,
   ellipsis: `
-
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -55,7 +54,6 @@ export const font = {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     text-fill-color: transparent;
-
   `
 };
 
