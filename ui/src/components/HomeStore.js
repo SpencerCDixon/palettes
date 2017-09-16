@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import shuffle from 'lodash.shuffle';
 import qs from 'qs';
-import { mockColors, getColors } from '../util';
+import { normalizeProtocol, mockColors, getColors } from '../util';
 import Home from './Home';
 
 class HomeStore extends Component {
@@ -32,7 +32,9 @@ class HomeStore extends Component {
 
   fetchColors = () => {
     this.setState({isFetching: true});
-    getColors({url: this.state.searchValue})
+    const url = normalizeProtocol(this.state.searchValue);
+
+    getColors({url})
       .then(({data}) => {
         this.setState({colors: data, isFetching: false, searchValue: ''});
       })

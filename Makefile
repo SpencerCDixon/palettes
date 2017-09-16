@@ -10,7 +10,7 @@ dev:
 deploy:
 	@echo "Deploying API"
 	@up
-	@cho "Deploying UI"
+	@echo "Deploying UI"
 	@cd ui && npm run deploy
 
 # Clean removes the Go binary and built JS

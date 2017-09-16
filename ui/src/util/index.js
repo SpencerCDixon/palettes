@@ -4,4 +4,5 @@ export {
 
 export {
   getColors,
+  normalizeProtocol,
 } from './api';

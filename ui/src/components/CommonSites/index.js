@@ -14,7 +14,6 @@ import {
   IoSocialYoutube,
 } from 'react-icons/lib/io';
 
-
 const Div = reflex(styled.div`
   padding: 8px 10px;
   border-radius: 3px;
@@ -24,53 +23,68 @@ const Div = reflex(styled.div`
   }
 `);
 
-const Container = ({children, to}) => (
-  <Div tabIndex={0} mx={[2, null, null]} my={[1, null, null]}>
-    {children}
-  </Div>
-)
+const Container = ({children, onClick, to}) => {
+  const handleClick = () => onClick(to);
+  const handleEnter = (e) => {
+    if (e.keyCode === 13) {
+      onClick(to)
+    }
+  }
+
+  return (
+    <Div 
+      tabIndex={0} 
+      mx={[2, null, null]} 
+      my={[1, null, null]}
+      onClick={handleClick}
+      onKeyDown={handleEnter}
+    >
+      {children}
+    </Div>
+  );
+};
 
 const CommonSites = ({onClick}) => {
   return (
     <Flex style={{width: '100%'}} wrap justify="space-around">
-      <Container>
-        <IoSocialFacebook size={30} onClick={() => onClick('https://facebook.com')} />
+      <Container onClick={onClick} to='facebook.com'>
+        <IoSocialFacebook size={30}/>
       </Container>
 
-      <Container>
-        <IoSocialGithub size={30} onClick={() => onClick('https://github.com')} />
+      <Container onClick={onClick} to='github.com'>
+        <IoSocialGithub size={30} />
       </Container>
 
-      <Container>
-        <IoSocialApple size={30} onClick={() => onClick('https://apple.com')} />
+      <Container onClick={onClick} to='apple.com'>
+        <IoSocialApple size={30} />
       </Container>
 
-      <Container>
-        <IoSocialDropbox size={30} onClick={() => onClick('https://dropbox.com')} />
+      <Container onClick={onClick} to='dropbox.com'>
+        <IoSocialDropbox size={30} />
       </Container>
 
-      <Container>
-        <IoSocialTwitch size={30} onClick={() => onClick('https://twitch.tv')} />
+      <Container onClick={onClick} to='twitch.tv'>
+        <IoSocialTwitch size={30} />
       </Container>
 
-      <Container>
-        <IoSocialVimeo size={30} onClick={() => onClick('https://vimeo.com')} />
+      <Container onClick={onClick} to='vimeo.com'>
+        <IoSocialVimeo size={30} />
       </Container>
 
-      <Container>
-        <IoSocialWindows size={30} onClick={() => onClick('https://microsoft.com')} />
+      <Container onClick={onClick} to='microsoft.com'>
+        <IoSocialWindows size={30} />
       </Container>
 
-      <Container>
-        <IoSocialYahoo size={30} onClick={() => onClick('https://yahoo.com')} />
+      <Container onClick={onClick} to='yahoo.com'>
+        <IoSocialYahoo size={30} />
       </Container>
 
-      <Container>
-        <IoSocialGoogle size={30} onClick={() => onClick('https://google.com')} />
+      <Container onClick={onClick} to='google.com'>
+        <IoSocialGoogle size={30} />
       </Container>
 
-      <Container>
-        <IoSocialYoutube size={30} onClick={() => onClick('https://youtube.com')} />
+      <Container onClick={onClick} to='youtube.com'>
+        <IoSocialYoutube size={30} />
       </Container>
     </Flex>
   );
