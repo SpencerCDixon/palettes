@@ -34,6 +34,17 @@ export const EmojiContainer = styled.a`
   &:hover {
     cursor: pointer;
   }
-  &:focus {
+`
+
+export const ShuffleContainer = styled.a`
+  ${flex.center}
+  height: 100%;
+  padding: 12px;
+  border-left: 1px solid #eee;
+  display: block;
+  box-sizing: border-box;
+  &:hover {
+    cursor: pointer;
+    color: rgba(0,0,0,0.7);
   }
 `

@@ -51,16 +51,11 @@ class Home extends Component {
             <Search 
               onSubmit={fetchColors} 
               onChange={setSearch}
+              onShuffle={shuffle}
               value={searchValue}
             />
             <Flex my={2}>
               <CommonSites onClick={setAndFetch} />
-
-              {/*
-              <Button tabIndex={0} onClick={shuffle}>
-                <Shuffle /> &nbsp; shuffle
-              </Button>
-              */}
             </Flex>
           </ToolBar>
 

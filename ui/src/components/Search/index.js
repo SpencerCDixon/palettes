@@ -1,15 +1,19 @@
 import React from 'react';
-import { Input, Container, Emoji, EmojiContainer } from './styles';
+import { ShuffleContainer, Input, Container, Emoji, EmojiContainer } from './styles';
 import { Box } from 'reflexbox';
+import { IoShuffle } from 'react-icons/lib/io';
 
-const Search = ({onSubmit, value, onChange}) => {
-  const handleKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      onSubmit();
-    }
+function onEnter(fn) {
+  return e => {
+    if (e.keyCode === 13) fn();
   }
-  const handleChange = (e) => onChange(e.target.value)
-  const handleSubmit = (e) => {
+}
+
+const Search = ({onShuffle, onSubmit, value, onChange}) => {
+  const handleKeyDown = onEnter(onSubmit)
+  const handleShuffle = onEnter(onShuffle)
+  const handleChange  = (e) => onChange(e.target.value)
+  const handleSubmit  = (e) => {
     e.preventDefault()
     onSubmit();
   }
@@ -29,6 +33,10 @@ const Search = ({onSubmit, value, onChange}) => {
         <EmojiContainer onClick={onSubmit} onKeyDown={handleKeyDown} tabIndex={0}>
           <Emoji role="img">🎨</Emoji>
         </EmojiContainer>
+
+        <ShuffleContainer onClick={onShuffle} onKeyDown={handleShuffle} tabIndex={0}>
+          <IoShuffle size={25} />
+        </ShuffleContainer>
       </Container>
     </form>
   );
