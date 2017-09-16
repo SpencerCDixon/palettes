@@ -6,7 +6,7 @@ A CLI and JSON API for discovering color palettes used by your favorite sites.
 
 [Easiest to just use the UI located here](http://palettes.netlify.com)
 
-Otherwise;
+Otherwise:
 
 ```sh
 $ go get github.com/spencercdixon/palettes
