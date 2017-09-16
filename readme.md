@@ -2,9 +2,14 @@
 
 A CLI and JSON API for discovering color palettes used by your favorite sites.
 
+## Usage
 
-# TODO:
+[Easiest to just use the UI located here](http://palettes.netlify.com)
 
-- [ ] implement an LRU cache
-- [ ] add more useful flags to the CLI/API
-- [ ] build out a basic frontend
+Otherwise;
+
+```sh
+$ go get github.com/spencercdixon/palettes
+$ palettes help
+$ palettes crawl https://wasabi.com
+```
