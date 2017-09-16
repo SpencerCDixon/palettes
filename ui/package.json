@@ -19,6 +19,7 @@
     "react-flip-move": "^2.9.15",
     "react-github-corner": "^1.0.0",
     "react-motion": "^0.5.1",
+    "recompose": "^0.25.0",
     "reflexbox": "^3.0.0-0",
     "styled-components": "^2.1.1",
     "valid-url": "^1.0.9"
