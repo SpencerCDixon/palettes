@@ -87,16 +87,16 @@ func New(l log.Interface, c *lru.Cache) *Crawler {
 
 // Crawl is how we get CSS color codes
 func (c Crawler) Crawl(url string) (*ColorResults, error) {
+	ctx := c.Logger.WithField("url", url)
+
 	cached, ok := c.Cache.Get(url)
 	if ok {
-		c.Logger.Infof("Found website %s in the cache", url)
+		ctx.Infof("Found website %s in cache", url)
 		if results, ok := cached.(*ColorResults); ok {
-			c.Logger.Infof("Returning color results: %+v", results)
+			ctx.Info("Returning color results")
 			return results, nil
 		}
 	}
-
-	ctx := c.Logger.WithField("url", url)
 
 	ctx.Info("Starting crawl")
 	results := NewColorResults()
@@ -139,14 +139,15 @@ func (c Crawler) Crawl(url string) (*ColorResults, error) {
 		}
 
 		if tt == html.ErrorToken {
-			log.Debug("End of parsing")
+			ctx.Debug("End of parsing")
 			break
 		}
 	}
 
-	// Wait until all external CSS have been fetched and scanned then cache
-	// results to avoid future HTTP requests
+	// Wait until all external CSS has been fetched and parsed 
 	wg.Wait()
+
+	// Add results to cache for future requests
 	c.Cache.Add(url, results)
 
 	return results, nil
