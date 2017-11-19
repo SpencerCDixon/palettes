@@ -13,3 +13,10 @@ $ go get github.com/spencercdixon/palettes
 $ palettes help
 $ palettes crawl https://wasabi.com
 ```
+
+## TODO
+* copy to clipboard the various colors
+* Filtering how many top X colors to see
+* Tracking colors over time
+* Aggregating which colors people are looking at to see what designs are "in"
+* Better designed background color/layout
